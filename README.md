@@ -1,8 +1,8 @@
 # TFLite Web
-Wrapper of TFLite interpreter. It is packaged in a WebAssembly binary that runs in a browser
+Run TFLite models on Dart JS. It is packaged in a WebAssembly binary that runs in a browser
 
 ## Getting Started
-+ Unpack tflite folder to your web folder.
++ Unpack tflite folder ([link](https://github.com/hoomanmmd/tflite-web/releases/download/0.0.1/tflite.zip)) to your web folder.
   Result structure:
   -- Web
   &#8197; &emsp14;&#8197; &emsp14;├── tflite
