@@ -17,10 +17,10 @@ Run TFLite models on Dart JS. It is packaged in a WebAssembly binary that runs i
 
 + Load a model:
 \
-By URL
+From URL
   ```TFLiteWeb.loadModelFromUrl```
 \
-By Data
+From Data
   ```TFLiteWeb.loadModelFromMemory```
 
 + Create Tensor:
