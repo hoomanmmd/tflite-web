@@ -1,7 +1,7 @@
 name: tflite_web
 description: Run Tensorflow Lite models on Web with TFLite JS
 version: 0.0.1
-homepage:
+homepage: https://github.com/hoomanmmd/tflite-web
 
 environment:
   sdk: '>=2.18.5 <3.0.0'
