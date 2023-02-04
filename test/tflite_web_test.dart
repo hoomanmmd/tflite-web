@@ -22,7 +22,7 @@ void main() {
   });
 
   test('Load TFLite Model from Url', () async {
-    final model = await TFLiteWeb.loadModelFromUrl(
+    final model = await TFLiteModel.fromUrl(
       '../example/web/models/face_detection.tflite',
     );
 
@@ -32,7 +32,7 @@ void main() {
 
   test('Wrong TFLite Model url', () async {
     expect(
-      () => TFLiteWeb.loadModelFromUrl(
+      () => TFLiteModel.fromUrl(
         '../example/web/models/non_existing_url.tflite',
       ),
       throwsA(isA<TFLiteWebException>()),
@@ -43,7 +43,7 @@ void main() {
     final data = await get(
       Uri.parse('../example/web/models/face_detection.tflite'),
     );
-    final model = await TFLiteWeb.loadModelFromMemory(data.bodyBytes);
+    final model = await TFLiteModel.fromMemory(data.bodyBytes);
 
     expect(model.inputs.length, 1);
     expect(model.outputs.length, 2);
@@ -51,13 +51,13 @@ void main() {
 
   test('Wrong TFLite Model Byte Array', () async {
     expect(
-      () => TFLiteWeb.loadModelFromMemory([0, 0]),
+      () => TFLiteModel.fromMemory([0, 0]),
       throwsA(isA<TFLiteWebException>()),
     );
   });
 
   test('Run Model', () async {
-    final model = await TFLiteWeb.loadModelFromUrl(
+    final model = await TFLiteModel.fromUrl(
       '../example/web/models/face_detection.tflite',
     );
 
@@ -71,7 +71,7 @@ void main() {
   });
 
   test('Wrong shape', () async {
-    final model = await TFLiteWeb.loadModelFromUrl(
+    final model = await TFLiteModel.fromUrl(
       '../example/web/models/face_detection.tflite',
     );
 

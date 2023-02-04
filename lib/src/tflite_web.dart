@@ -34,14 +34,4 @@ class TFLiteWeb {
       tfliteScriptUrl,
     ]);
   }
-
-  /// Loads a TFLiteModel from the given model url
-  ///
-  /// Throws TFLiteWebException if loading model fails
-  static Future<TFLiteModel> loadModelFromUrl(String url) => _load(url);
-
-  /// Loads a TFLiteModel from the given model data
-  ///
-  /// Throws TFLiteWebException if loading model fails
-  static Future<TFLiteModel> loadModelFromMemory(List<int> data) => _load(data);
 }

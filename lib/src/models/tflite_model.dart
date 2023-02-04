@@ -6,6 +6,16 @@ class TFLiteModel {
 
   final _TFLiteModel _tfLiteModel;
 
+  /// Loads a TFLiteModel from the given model url
+  ///
+  /// Throws TFLiteWebException if loading model fails
+  static Future<TFLiteModel> fromUrl(String url) => _load(url);
+
+  /// Loads a TFLiteModel from the given model data
+  ///
+  /// Throws TFLiteWebException if loading model fails
+  static Future<TFLiteModel> fromMemory(List<int> data) => _load(data);
+
   /// Execute the inference for the input tensors.
   ///
   ///  The [inputs] tensors, when there is single input for the model,

@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     TFLiteWeb.initialize().then((value) async {
-      _tfLieModel = await TFLiteWeb.loadModelFromUrl(
+      _tfLieModel = await TFLiteModel.fromUrl(
         '/models/face_detection.tflite',
       );
       setState(() {});
