@@ -17,11 +17,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    TFLiteWeb.initialize().then((value) async {
-      _tfLieModel = await TFLiteModel.fromUrl(
-        '/models/face_detection.tflite',
-      );
-      setState(() {});
+    Future.delayed(const Duration(seconds: 10), () {
+      TFLiteWeb.initialize().then((value) async {
+        _tfLieModel = await TFLiteModel.fromUrl(
+          '/models/face_detection.tflite',
+        );
+        setState(() {});
+      }).catchError((e) {
+        print(e);
+      });
     });
   }
 

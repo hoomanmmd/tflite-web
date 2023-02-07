@@ -14,21 +14,38 @@ Future<void> loadScript(List<String> urls) async {
     final scriptTag = _createScriptTag(url);
     head.append(scriptTag);
 
-    final task = scriptTag.onLoad.first;
-    tasks.add(task);
+    final loadEvent = scriptTag.onLoad.first;
+    final errorEvent = scriptTag.onError.first;
+    tasks.add(loadEvent);
     unawaited(
-      scriptTag.onError.first.then((value) {
+      errorEvent.then((value) {
         if (!completer.isCompleted) {
           completer.completeError(TFLiteWebException('Error Loading Scripts'));
         }
       }),
     );
-    await task;
+
+    final success = await _waitForFirst(loadEvent, errorEvent);
+    if (!success) {
+      return completer.future;
+    }
   }
 
   unawaited(
     Future.wait(tasks).then((value) => completer.complete()),
   );
+
+  return completer.future;
+}
+
+Future<bool> _waitForFirst(
+  Future<html.Event> onLoad,
+  Future<html.Event> onError,
+) {
+  final completer = Completer<bool>();
+
+  onLoad.then((value) => completer.complete(true));
+  onError.then((value) => completer.complete(false));
 
   return completer.future;
 }

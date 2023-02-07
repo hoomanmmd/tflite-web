@@ -12,7 +12,7 @@ void main() {
   setUp(() async {
     await TFLiteWeb.initialize(
       tfJsScriptUrl: '../example/web/tflite/tf-core.js',
-      tfBackendScriptUrl: ['../example/web/tflite/tf-backend-cpu.js'],
+      tfBackendScriptUrls: ['../example/web/tflite/tf-backend-cpu.js'],
       tfliteScriptUrl: '../example/web/tflite/tf-tflite.min.js',
     );
   });

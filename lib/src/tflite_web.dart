@@ -19,7 +19,7 @@ class TFLiteWeb {
   /// Throws TFLiteWebException if fetching script fails
   static Future<void> initialize({
     String tfJsScriptUrl = '/tflite/tf-core.js',
-    List<String> tfBackendScriptUrl = const [
+    List<String> tfBackendScriptUrls = const [
       '/tflite/tf-backend-cpu.js',
     ],
     String tfliteScriptUrl = '/tflite/tf-tflite.min.js',
@@ -30,7 +30,7 @@ class TFLiteWeb {
 
     await loadScript([
       tfJsScriptUrl,
-      ...tfBackendScriptUrl,
+      ...tfBackendScriptUrls,
       tfliteScriptUrl,
     ]);
   }
