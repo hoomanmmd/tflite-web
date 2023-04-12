@@ -5,10 +5,7 @@ import 'package:tflite_web/src/tflite_web_exception.dart';
 
 /// Load JavaScript Script
 Future<void> loadScript(List<String> urls) async {
-  final tasks = <Future<void>>[];
   final head = html.querySelector('head')!;
-
-  final completer = Completer<void>();
 
   for (final url in urls) {
     final scriptTag = _createScriptTag(url);
@@ -16,26 +13,12 @@ Future<void> loadScript(List<String> urls) async {
 
     final loadEvent = scriptTag.onLoad.first;
     final errorEvent = scriptTag.onError.first;
-    tasks.add(loadEvent);
-    unawaited(
-      errorEvent.then((value) {
-        if (!completer.isCompleted) {
-          completer.completeError(TFLiteWebException('Error Loading Scripts'));
-        }
-      }),
-    );
 
     final success = await _waitForFirst(loadEvent, errorEvent);
     if (!success) {
-      return completer.future;
+      throw TFLiteWebException('Error Loading Scripts');
     }
   }
-
-  unawaited(
-    Future.wait(tasks).then((value) => completer.complete()),
-  );
-
-  return completer.future;
 }
 
 Future<bool> _waitForFirst(
