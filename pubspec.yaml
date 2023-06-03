@@ -1,16 +1,16 @@
 name: tflite_web
 description: Run Tensorflow Lite models using TFLite JS and WebAssembly on browser
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/hoomanmmd/tflite-web
+issue_tracker: https://github.com/hoomanmmd/tflite-web/issues
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: '>=2.18.5 <4.0.0'
 
 dependencies:
-  js: ^0.6.4
+  js: ^0.6.7
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
-  http: ^0.13.5
-  test: ^1.22.2
+  http: ^1.0.0
+  test: ^1.24.3
   very_good_analysis: ^3.1.0

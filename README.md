@@ -9,16 +9,31 @@ Run TFLite models on Dart JS. It is packaged in a WebAssembly binary that runs i
   &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tf-backend-cpu.js\
   &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tf-core.js\
   &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tf-tflite.min.js\
-  &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tflite_web_api_cc_simd.js\
-  &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tflite_web_api_cc_simd.wasm
+  &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tflite_web_...
 
-+ Sample Code:
++ Initialize TFLite:
 ```
 await TFLiteWeb.initialize();
+```
+This may take a couple of seconds
++ Load Model from Url:
+```
 final loadedModel = await TFLiteModel.fromUrl(modelUrl);
+```
++ Load Model from memory:
+```
+final loadedModel = await TFLiteModel.fromMemory(modelBytes);
+```
++ Create a tensor:
+```
 final input = createTensor(data, shape, dataType);
+```
++ Run the model:
+```
 final outputs = loadedModel.predict(input);
 ```
+Depending on the model, the input can be a Tensor, a list of Tensors, or a Tensor map
+
 
 ## Current Version:
 + TF-JS: 4.2.0

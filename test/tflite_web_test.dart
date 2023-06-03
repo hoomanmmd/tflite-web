@@ -5,7 +5,7 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart';
 import 'package:test/test.dart';
-import 'package:tflite_web/src/utils.dart';
+import 'package:tflite_web/src/infrastructure/utils.dart';
 import 'package:tflite_web/tflite_web.dart';
 
 void main() {

@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 10), () {
+    Future.delayed(const Duration(seconds: 1), () {
       TFLiteWeb.initialize().then((value) async {
         _tfLieModel = await TFLiteModel.fromUrl(
           '/models/face_detection.tflite',

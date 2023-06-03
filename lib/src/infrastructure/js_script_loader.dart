@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:html' as html;
 
-import 'package:tflite_web/src/tflite_web_exception.dart';
+import 'package:tflite_web/src/models/tflite_web_exception.dart';
 
 /// Load JavaScript Script
 Future<void> loadScript(List<String> urls) async {
