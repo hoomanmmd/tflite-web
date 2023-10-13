@@ -43,7 +43,7 @@ class TFLiteModel {
 }
 
 Future<TFLiteModel> _load(dynamic data) async {
-  assert(isTFLiteLoaded(), 'Package must be initialized');
+  assert(TFLiteScript.isLoaded(), 'Package must be initialized');
 
   try {
     final promise = _loadTFLiteModel(data);

@@ -1,3 +1,6 @@
+## 0.2.0
+* Update TFLite js to 0.0.1-alpha.10 (Replace new tflite folder from package README)
+
 ## 0.1.2
 * Update Readme
 

@@ -5,7 +5,7 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart';
 import 'package:test/test.dart';
-import 'package:tflite_web/src/infrastructure/utils.dart';
+import 'package:tflite_web/src/script/tflite_script.dart';
 import 'package:tflite_web/tflite_web.dart';
 
 void main() {
@@ -17,8 +17,8 @@ void main() {
     );
   });
 
-  test('Package Loaded', () async {
-    expect(isTFLiteLoaded(), isTrue);
+  test('Package is loaded', () async {
+    expect(TFLiteScript.isLoaded(), isTrue);
   });
 
   test('Load TFLite Model from Url', () async {

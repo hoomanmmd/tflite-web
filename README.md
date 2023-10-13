@@ -2,25 +2,25 @@
 Run TFLite models on Dart JS. It is packaged in a WebAssembly binary that runs in a browser
 
 ## Getting Started
-+ Unpack tflite ([link](https://github.com/hoomanmmd/tflite-web/releases/download/0.0.1/tflite.zip)) into your web folder. \
++ Unpack tflite ([link](https://github.com/hoomanmmd/tflite-web/releases/download/0.2.0/tflite.zip)) into your web folder. \
   Result structure:\
   -- Web\
   &#8197; &emsp14;&#8197; &emsp14;├── tflite\
-  &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tf-backend-cpu.js\
-  &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tf-core.js\
-  &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tf-tflite.min.js\
-  &#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;&#8197; &emsp14;├── tflite_web_...
+  &#8197; &emsp14;&#8197; &emsp14;───────────├── tf-backend-cpu.js\
+  &#8197; &emsp14;&#8197; &emsp14;───────────├── tf-core.js\
+  &#8197; &emsp14;&#8197; &emsp14;───────────├── tf-tflite.min.js\
+  &#8197; &emsp14;&#8197; &emsp14;───────────├── tflite_web_...
 
 + Initialize TFLite:
 ```
 await TFLiteWeb.initialize();
 ```
 This may take a couple of seconds
-+ Load Model from Url:
++ Either Load Model from Url:
 ```
 final loadedModel = await TFLiteModel.fromUrl(modelUrl);
 ```
-+ Load Model from memory:
++ Or load from memory:
 ```
 final loadedModel = await TFLiteModel.fromMemory(modelBytes);
 ```
@@ -36,5 +36,5 @@ Depending on the model, the input can be a Tensor, a list of Tensors, or a Tenso
 
 
 ## Current Version:
-+ TF-JS: 4.2.0
-+ TF-JS TFLite: 0.0.1-alpha.9
++ TF-JS: 4.11.0
++ TF-JS TFLite: 0.0.1-alpha.10

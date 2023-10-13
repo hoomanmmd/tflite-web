@@ -1,5 +1,5 @@
 import 'package:js/js.dart';
-import 'package:tflite_web/src/infrastructure/extensions.dart';
+import 'package:tflite_web/src/extensions/js_promise_extensions.dart';
 import 'package:tflite_web/src/models/js_promise.dart';
 import 'package:tflite_web/src/models/tflite_data_type.dart';
 import 'package:tflite_web/src/models/tflite_web_exception.dart';
