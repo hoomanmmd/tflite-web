@@ -1,3 +1,9 @@
+## 0.2.2
+* Update dependencies
+
+## 0.2.1
+* Remove example from pubignore
+
 ## 0.2.0
 * Update TFLite js to 0.0.1-alpha.10 (Replace new tflite folder from package README)
 

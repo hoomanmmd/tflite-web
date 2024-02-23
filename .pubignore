@@ -16,7 +16,7 @@ migrate_working_dir/
 *.iws
 .idea/
 
-/example
+/example/web
 
 /pubspec.lock
 **/doc/api/

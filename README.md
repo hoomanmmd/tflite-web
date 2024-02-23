@@ -6,10 +6,10 @@ Run TFLite models on Dart JS. It is packaged in a WebAssembly binary that runs i
   Result structure:\
   -- Web\
   &#8197; &emsp14;&#8197; &emsp14;├── tflite\
-  &#8197; &emsp14;&#8197; &emsp14;───────────├── tf-backend-cpu.js\
-  &#8197; &emsp14;&#8197; &emsp14;───────────├── tf-core.js\
-  &#8197; &emsp14;&#8197; &emsp14;───────────├── tf-tflite.min.js\
-  &#8197; &emsp14;&#8197; &emsp14;───────────├── tflite_web_...
+  &#8197; &emsp14;&#8197; &emsp14;──────├── tf-backend-cpu.js\
+  &#8197; &emsp14;&#8197; &emsp14;──────├── tf-core.js\
+  &#8197; &emsp14;&#8197; &emsp14;──────├── tf-tflite.min.js\
+  &#8197; &emsp14;&#8197; &emsp14;──────├── tflite_web_...
 
 + Initialize TFLite:
 ```
