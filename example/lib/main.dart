@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:tflite_web/tflite_web.dart';
 
+// ignore_for_file: avoid_print
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -49,14 +50,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _runModel() async {
-    final tensor = createTensor(
+    final tensor = Tensor(
       Float32List(128 * 128 * 3),
       shape: [1, 128, 128, 3],
       type: TFLiteDataType.float32,
     );
 
     final result = _tfLieModel!.predict<NamedTensorMap>(tensor);
-    print((result['regressors'] as Tensor).size);
+
+    print('${result.get<Tensor>('regressors').size}');
+    print(
+      '${result.get<Tensor>('regressors').dataSync<List<double>>().length}',
+    );
   }
 }
 

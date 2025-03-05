@@ -1,13 +1,14 @@
-import 'dart:js';
+import 'dart:js_interop';
+import 'dart:js_interop_unsafe';
 
 /// TFLite script
 class TFLiteScript {
   TFLiteScript._();
 
   /// Check if script loaded successfully
-  static bool isLoaded() {
-    final tflite = context['tflite'];
+  static bool isInitialized() {
+    final tflite = globalContext['tflite'];
 
-    return tflite is JsObject && tflite.hasProperty('loadTFLiteModel');
+    return tflite is JSObject && tflite.has('loadTFLiteModel');
   }
 }

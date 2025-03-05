@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:html' as html;
 
 import 'package:tflite_web/src/models/tflite_web_exception.dart';
+import 'package:web/web.dart' as web;
 
 /// Load JavaScript Script
 Future<void> loadScript(List<String> urls) async {
-  final head = html.querySelector('head')!;
+  final head = web.document.querySelector('head')!;
 
   for (final url in urls) {
     final scriptTag = _createScriptTag(url);
@@ -22,8 +22,8 @@ Future<void> loadScript(List<String> urls) async {
 }
 
 Future<bool> _waitForFirst(
-  Future<html.Event> onLoad,
-  Future<html.Event> onError,
+  Future<web.Event> onLoad,
+  Future<web.Event> onError,
 ) {
   final completer = Completer<bool>();
 
@@ -33,7 +33,7 @@ Future<bool> _waitForFirst(
   return completer.future;
 }
 
-html.ScriptElement _createScriptTag(String url) => html.ScriptElement()
+web.HTMLScriptElement _createScriptTag(String url) => web.HTMLScriptElement()
   ..src = url
   ..type = 'application/javascript'
   ..async = true;

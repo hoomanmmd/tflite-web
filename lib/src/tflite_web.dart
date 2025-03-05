@@ -1,6 +1,6 @@
-import 'dart:js_util' as util;
+import 'dart:js_interop';
+import 'dart:typed_data';
 
-import 'package:js/js.dart';
 import 'package:tflite_web/src/models/model_tensor_info.dart';
 import 'package:tflite_web/src/models/named_tensor_map.dart';
 import 'package:tflite_web/src/models/tensor.dart';
@@ -24,7 +24,7 @@ class TFLiteWeb {
     ],
     String tfliteScriptUrl = '/tflite/tf-tflite.min.js',
   }) async {
-    if (TFLiteScript.isLoaded()) {
+    if (TFLiteScript.isInitialized()) {
       return;
     }
 

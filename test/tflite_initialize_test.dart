@@ -9,7 +9,7 @@ void main() {
       throwsA(isA<TFLiteWebException>()),
     );
 
-    expect(TFLiteScript.isLoaded(), isFalse);
+    expect(TFLiteScript.isInitialized(), isFalse);
 
     await TFLiteWeb.initialize(
       tfJsScriptUrl: '../example/web/tflite/tf-core.js',
@@ -17,6 +17,6 @@ void main() {
       tfliteScriptUrl: '../example/web/tflite/tf-tflite.min.js',
     );
 
-    expect(TFLiteScript.isLoaded(), isTrue);
+    expect(TFLiteScript.isInitialized(), isTrue);
   });
 }

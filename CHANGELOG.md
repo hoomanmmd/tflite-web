@@ -1,3 +1,6 @@
+## 0.3.0
+* Support WASM
+
 ## 0.2.2
 * Update dependencies
 

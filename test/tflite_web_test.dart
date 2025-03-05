@@ -17,17 +17,25 @@ void main() {
     );
   });
 
-  test('Package is loaded', () async {
-    expect(TFLiteScript.isLoaded(), isTrue);
+  test('Package is initialized', () async {
+    expect(TFLiteScript.isInitialized(), isTrue);
   });
 
   test('Load TFLite Model from Url', () async {
     final model = await TFLiteModel.fromUrl(
       '../example/web/models/face_detection.tflite',
     );
+    expect(model.inputs[0].name, 'input');
+    expect(model.inputs[0].shape, [1, 128, 128, 3]);
+    expect(model.inputs[0].dtype, 'float32');
 
-    expect(model.inputs.length, 1);
-    expect(model.outputs.length, 2);
+    expect(model.outputs[0].name, 'regressors');
+    expect(model.outputs[0].dtype, 'float32');
+    expect(model.outputs[0].shape, [1, 896, 16]);
+
+    expect(model.outputs[1].name, 'classificators');
+    expect(model.outputs[1].dtype, 'float32');
+    expect(model.outputs[1].shape, [1, 896, 1]);
   });
 
   test('Wrong TFLite Model url', () async {
@@ -61,7 +69,7 @@ void main() {
       '../example/web/models/face_detection.tflite',
     );
 
-    final tensor = createTensor(
+    final tensor = Tensor(
       Float32List(128 * 128 * 3),
       shape: [1, 128, 128, 3],
       type: TFLiteDataType.float32,
@@ -75,7 +83,7 @@ void main() {
       '../example/web/models/face_detection.tflite',
     );
 
-    final tensor = createTensor(
+    final tensor = Tensor(
       Float32List(127 * 127 * 3),
       shape: [1, 127, 127, 3],
       type: TFLiteDataType.float32,
@@ -85,21 +93,55 @@ void main() {
       () => model.predict<NamedTensorMap>(tensor),
       throwsA(isA<TFLiteWebException>()),
     );
+
+    await expectLater(
+      () => model.predict<NamedTensorMap>([tensor, tensor]),
+      throwsA(
+        predicate(
+          (e) =>
+              e is TFLiteWebException &&
+              e
+                  .toString()
+                  .contains('does not match the size of the input tensors'),
+        ),
+      ),
+    );
+
+    final namedTensorMap = NamedTensorMap();
+    namedTensorMap['test1'] = tensor;
+    namedTensorMap['test2'] = tensor;
+
+    await expectLater(
+      () => model.predict<NamedTensorMap>(namedTensorMap),
+      throwsA(
+        predicate(
+          (e) =>
+              e is TFLiteWebException &&
+              e.toString().contains(
+                    "The model input names don't match the model input names",
+                  ),
+        ),
+      ),
+    );
   });
 
   test('Create NamedTensorMap', () async {
-    final tensor = createTensor([0]);
+    final tensor = Tensor([0]);
 
     final tensorMap = NamedTensorMap();
     tensorMap['test'] = tensor;
 
+    expect(tensorMap['test'], tensor);
     expect(tensorMap.get<Tensor>('test'), tensor);
   });
 
   test('Tensor Data', () async {
-    final tensor = createTensor([0]);
+    final tensor = Tensor([0]);
 
     expect(tensor.dtype, TFLiteDataType.float32.name);
+    expect(tensor.strides.length, 0);
+    expect(tensor.isDisposed, false);
+    expect(tensor.size, 1);
 
     expect(tensor.dataSync<List<double>>(), [0]);
 
@@ -110,11 +152,11 @@ void main() {
   });
 
   test('Wrong Tensor Data', () async {
-    expect(() => createTensor({'a': 0}), throwsA(isA<TFLiteWebException>()));
+    expect(() => Tensor({'a': 0}), throwsA(isA<TFLiteWebException>()));
   });
 
   test('Tensor Disposing', () async {
-    final tensor = createTensor([0]);
+    final tensor = Tensor([0]);
 
     expect(tensor.isDisposed, isFalse);
     tensor.dispose();
