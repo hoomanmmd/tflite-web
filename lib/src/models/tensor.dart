@@ -1,4 +1,5 @@
 import 'dart:js_interop';
+import 'dart:typed_data';
 
 import 'package:tflite_web/src/models/tflite_data_type.dart';
 import 'package:tflite_web/src/models/tflite_web_exception.dart';
@@ -15,12 +16,29 @@ class Tensor {
     TFLiteDataType? type,
   }) {
     try {
-      return _createTensor(data.jsify()!, shape?.jsify(), type?.name.toJS)
-          as Tensor;
+      return _createTensor(
+          _convertDartDataToJs(data), shape?.jsify(), type?.name.toJS);
     } catch (e) {
       throw TFLiteWebException(e);
     }
   }
+}
+
+JSAny _convertDartDataToJs(Object data) {
+  if (data is Float32List) {
+    return data.toJS;
+  }
+  if (data is Float64List) {
+    return data.toJS;
+  }
+  if (data is Int32List) {
+    return data.toJS;
+  }
+  if (data is String) {
+    return data.toJS;
+  }
+
+  return data.jsify()!;
 }
 
 /// Tensor Extension
@@ -44,7 +62,8 @@ extension TensorExtensions on Tensor {
     final jsStrides = _strides;
     final strides = List<int>.generate(
       jsStrides.length,
-      (i) => jsStrides[i] as int,
+      (i) => jsStrides[i].toDartInt,
+      growable: false,
     );
 
     return strides;
@@ -63,7 +82,7 @@ extension TensorExtensions on Tensor {
   external JSBoolean get _isDisposed;
 
   @JS('strides')
-  external JSArray<JSAny> get _strides;
+  external JSArray<JSNumber> get _strides;
 
   @JS('size')
   external JSNumber get _size;
@@ -97,4 +116,4 @@ Tensor createTensor(
 
 @staticInterop
 @JS('tf.tensor')
-external JSAny _createTensor(JSAny data, JSAny? shape, JSAny? type);
+external Tensor _createTensor(JSAny data, JSAny? shape, JSAny? type);

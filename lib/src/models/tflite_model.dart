@@ -35,28 +35,25 @@ class TFLiteModel {
     );
 
     try {
-      final dynamic output;
+      final JSAny jsInput;
       if (inputs is List) {
-        final jsArray = JSArray();
+        jsInput = JSArray();
         for (final input in inputs) {
-          jsArray.add(input as JSAny);
+          jsInput.add(input as JSAny);
         }
-        output = _tfLiteModel.predict(jsArray, null);
       } else {
-        output = _tfLiteModel.predict(inputs as JSAny, null);
+        jsInput = inputs as JSAny;
       }
+      final output = _tfLiteModel.predict(jsInput, null);
 
       if (output is JSArray) {
-        try {
-          final outputs = List<Tensor>.generate(
-            output.length,
-            (i) => (output[i] as Tensor?)!,
-          );
+        final outputs = List<Tensor>.generate(
+          output.length,
+          (i) => (output[i] as Tensor?)!,
+          growable: false,
+        );
 
-          return outputs as T;
-        } catch (e) {
-          return output as T;
-        }
+        return outputs as T;
       }
 
       return output as T;
@@ -108,6 +105,7 @@ extension _TFLiteModelExtensions on _TFLiteModel {
     final inputs = List<ModelTensorInfo>.generate(
       jsInputs.length,
       (i) => jsInputs[i] as ModelTensorInfo,
+      growable: false,
     );
 
     return inputs;
@@ -118,6 +116,7 @@ extension _TFLiteModelExtensions on _TFLiteModel {
     final outputs = List<ModelTensorInfo>.generate(
       jsOutputs.length,
       (i) => jsOutputs[i] as ModelTensorInfo,
+      growable: false,
     );
 
     return outputs;

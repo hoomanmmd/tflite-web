@@ -14,4 +14,16 @@ enum TFLiteDataType {
 
   /// String Data Type
   string;
+
+  const TFLiteDataType();
+
+  factory TFLiteDataType.fromName(String name) {
+    for (final value in TFLiteDataType.values) {
+      if (value.name == name) {
+        return value;
+      }
+    }
+
+    throw ArgumentError();
+  }
 }

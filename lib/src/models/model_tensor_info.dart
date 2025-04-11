@@ -1,5 +1,7 @@
 import 'dart:js_interop';
 
+import 'package:tflite_web/src/models/tflite_data_type.dart';
+
 /// Model input/output tensor info
 @staticInterop
 @JS('ModelTensorInfo')
@@ -18,11 +20,14 @@ extension ModelTensorInfoExtensions on ModelTensorInfo {
     }
     final inputs = List<int>.generate(
       jsInputs.length,
-      (i) => jsInputs[i] as int,
+      (i) => jsInputs[i].toDartInt,
+      growable: false,
     );
 
     return inputs;
   }
+
+  TFLiteDataType get dataType => TFLiteDataType.fromName(_dtype.toDart);
 
   /// Data type of the tensor.
   String get dtype => _dtype.toDart;
@@ -31,7 +36,7 @@ extension ModelTensorInfoExtensions on ModelTensorInfo {
   external JSString get _name;
 
   @JS('shape')
-  external JSArray<JSAny>? get _shape;
+  external JSArray<JSNumber>? get _shape;
 
   @JS('dtype')
   external JSString get _dtype;
