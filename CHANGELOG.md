@@ -1,3 +1,6 @@
+## 0.3.1
+* Remove unnecessary casting
+
 ## 0.3.0
 * Support WASM
 
