@@ -2,20 +2,12 @@
 Run TFLite models on Dart. It is packaged in a WebAssembly binary that runs in a browser
 
 ## Getting Started
-+ Unpack tflite ([link](https://github.com/hoomanmmd/tflite-web/releases/download/0.2.0/tflite.zip)) into your web folder. \
-  Result structure:\
-  -- Web\
-  &#8197; &emsp14;&#8197; &emsp14;├── tflite\
-  &#8197; &emsp14;&#8197; &emsp14;──────├── tf-backend-cpu.js\
-  &#8197; &emsp14;&#8197; &emsp14;──────├── tf-core.js\
-  &#8197; &emsp14;&#8197; &emsp14;──────├── tf-tflite.min.js\
-  &#8197; &emsp14;&#8197; &emsp14;──────├── tflite_web_...
-
 + Initialize TFLite:
 ```
-await TFLiteWeb.initialize();
+await TFLiteWeb.initializeUsingCDN();
 ```
-This may take a couple of seconds
+This may take a couple of seconds.
+You can load JS scripts from your own hosting solution using `TFLiteWeb.initialize()`.
 + Either Load Model from Url:
 ```
 final model = await TFLiteModel.fromUrl(modelUrl);

@@ -1,3 +1,6 @@
+## 0.3.2
+* Add ability to load scripts from CDN
+
 ## 0.3.1
 * Remove unnecessary casting
 

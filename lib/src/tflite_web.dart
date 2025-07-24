@@ -10,6 +10,9 @@ import 'package:tflite_web/src/script/tflite_script.dart';
 
 part 'models/tflite_model.dart';
 
+const _cdnBaseUrl =
+    'https://cdn.jsdelivr.net/gh/hoomanmmd/tflite-js@v0.0.1-alpha.10';
+
 /// TFLite Web
 class TFLiteWeb {
   TFLiteWeb._();
@@ -32,6 +35,23 @@ class TFLiteWeb {
       tfJsScriptUrl,
       ...tfBackendScriptUrls,
       tfliteScriptUrl,
+    ]);
+  }
+
+  /// Initialize TFLite package
+  ///
+  /// Throws TFLiteWebException if fetching script fails
+  static Future<void> initializeUsingCDN({
+    List<String> tfBackendScriptUrls = const ['tf-backend-cpu.js'],
+  }) async {
+    if (TFLiteScript.isInitialized()) {
+      return;
+    }
+
+    await loadScript([
+      '$_cdnBaseUrl/tf-core.js',
+      ...tfBackendScriptUrls.map((script) => '$_cdnBaseUrl/$script'),
+      '$_cdnBaseUrl/tf-tflite.min.js',
     ]);
   }
 }
