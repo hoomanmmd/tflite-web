@@ -1,3 +1,6 @@
+## 0.3.3
+* Removed an unnecessary generic
+
 ## 0.3.2
 * Add ability to load scripts from CDN
 

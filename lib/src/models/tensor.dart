@@ -91,7 +91,7 @@ extension TensorExtensions on Tensor {
   external JSAny _dataSync();
 
   @JS('data')
-  external JSPromise _data<JSAny>();
+  external JSPromise _data();
 
   /// Dispose Tensor from memory
   external void dispose();
@@ -100,7 +100,7 @@ extension TensorExtensions on Tensor {
   /// Returns a Future of TypedArray that resolves when
   /// the computation has finished.
   Future<T> dataAsync<T>() async {
-    final output = await _data<T>().toDart;
+    final output = await _data().toDart;
     return output.dartify() as T;
   }
 }
