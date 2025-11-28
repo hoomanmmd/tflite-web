@@ -1,5 +1,3 @@
-library tflite_web;
-
 export 'src/models/model_tensor_info.dart';
 export 'src/models/named_tensor_map.dart';
 export 'src/models/tensor.dart';

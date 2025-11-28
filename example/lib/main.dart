@@ -58,9 +58,9 @@ class _HomePageState extends State<HomePage> {
 
     final result = _tfLieModel!.predict<NamedTensorMap>(tensor);
 
-    print('${result.get<Tensor>('regressors').size}');
+    print('${result['regressors'].size}');
     print(
-      '${result.get<Tensor>('regressors').dataSync<List<double>>().length}',
+      '${result['regressors'].dataSync<List<double>>().length}',
     );
   }
 }

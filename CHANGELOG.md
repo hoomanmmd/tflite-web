@@ -1,3 +1,6 @@
+## 0.4.0
+* Breaking change: Removed get method from NamedTensorMap. Use [] operator instead.
+
 ## 0.3.3
 * Removed an unnecessary generic
 

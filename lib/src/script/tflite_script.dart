@@ -8,7 +8,10 @@ class TFLiteScript {
   /// Check if script loaded successfully
   static bool isInitialized() {
     final tflite = globalContext['tflite'];
+    if (tflite != null && tflite.isA<JSObject>()) {
+      return (tflite as JSObject).has('loadTFLiteModel');
+    }
 
-    return tflite is JSObject && tflite.has('loadTFLiteModel');
+    return false;
   }
 }

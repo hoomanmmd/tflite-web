@@ -27,6 +27,7 @@ extension ModelTensorInfoExtensions on ModelTensorInfo {
     return inputs;
   }
 
+  /// Data type of the tensor
   TFLiteDataType get dataType => TFLiteDataType.fromName(_dtype.toDart);
 
   /// Data type of the tensor.

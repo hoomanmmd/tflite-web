@@ -105,15 +105,6 @@ extension TensorExtensions on Tensor {
   }
 }
 
-/// Creates a tf.Tensor with the provided values, shape and dtype.
-@Deprecated('Use Tensor() instead')
-Tensor createTensor(
-  Object data, {
-  List<int>? shape,
-  TFLiteDataType? type,
-}) =>
-    Tensor(data, shape: shape, type: type);
-
 @staticInterop
 @JS('tf.tensor')
 external Tensor _createTensor(JSAny data, JSAny? shape, JSAny? type);

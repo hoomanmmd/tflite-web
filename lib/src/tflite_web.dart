@@ -2,7 +2,6 @@ import 'dart:js_interop';
 import 'dart:typed_data';
 
 import 'package:tflite_web/src/models/model_tensor_info.dart';
-import 'package:tflite_web/src/models/named_tensor_map.dart';
 import 'package:tflite_web/src/models/tensor.dart';
 import 'package:tflite_web/src/models/tflite_web_exception.dart';
 import 'package:tflite_web/src/script/js_script_loader.dart';

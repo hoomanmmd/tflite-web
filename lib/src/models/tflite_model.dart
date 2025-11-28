@@ -26,14 +26,9 @@ class TFLiteModel {
   ///
   ///  The [inputs] tensors, when there is single input for the model,
   ///  inputs param should be a Tensor. For models with multiple inputs,
-  ///  inputs params should be in either Tensor[] if the input order is fixed,
-  ///  or otherwise NamedTensorMap format.
+  ///  inputs params should be in either list of Tensors if the input order
+  ///  is fixed, or otherwise NamedTensorMap format.
   T predict<T>(Object inputs) {
-    assert(
-      inputs is Tensor || inputs is List<Tensor> || inputs is NamedTensorMap,
-      'Input must be Tensor or Tensor[] or NamedTensorMap',
-    );
-
     try {
       final JSAny jsInput;
       if (inputs is List) {
@@ -46,17 +41,18 @@ class TFLiteModel {
       }
       final output = _tfLiteModel.predict(jsInput, null);
 
-      if (output is JSArray) {
+      if (output.isA<JSArray>()) {
+        final jsArray = output as JSArray;
         final outputs = List<Tensor>.generate(
-          output.length,
-          (i) => (output[i] as Tensor?)!,
+          jsArray.length,
+          (i) => (jsArray[i] as Tensor?)!,
           growable: false,
         );
 
         return outputs as T;
       }
 
-      return output as T;
+      return (output as Object) as T;
     } catch (e) {
       throw TFLiteWebException(e);
     }

@@ -14,17 +14,11 @@ class NamedTensorMap {
 /// Named Tensor Map Extensions
 extension NamedTensorMapExtensions on NamedTensorMap {
   /// get Tensor from Map
-  dynamic operator [](String name) => (this as JSObject).getProperty(name.toJS);
+  Tensor operator [](String name) =>
+      (this as JSObject).getProperty(name.toJS)! as Tensor;
 
   /// set Tensor
-  void operator []=(String name, Object value) {
-    if (value is Tensor) {
-      (this as JSObject).setProperty(name.toJS, value as JSAny);
-    }
-
-    (this as JSObject).setProperty(name.toJS, value.jsify());
+  void operator []=(String name, Tensor value) {
+    (this as JSObject).setProperty(name.toJS, value as JSAny);
   }
-
-  /// get Tensor from Map
-  T get<T>(String name) => (this as JSObject).getProperty(name.toJS) as T;
 }

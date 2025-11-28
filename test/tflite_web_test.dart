@@ -132,7 +132,6 @@ void main() {
     tensorMap['test'] = tensor;
 
     expect(tensorMap['test'], tensor);
-    expect(tensorMap.get<Tensor>('test'), tensor);
   });
 
   test('Tensor Data', () async {
